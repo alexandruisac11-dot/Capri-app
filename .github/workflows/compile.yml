@@ -17,12 +17,10 @@
               java-version: '17'
               distribution: 'temurin'
 
-          - name: Build APK with Gradle
+          - name: Generate Gradle Wrapper and Build APK
             run: |
-              # Find where gradlew is hiding and run it
-              GRADLE_DIR=$(find . -name "gradlew" -exec dirname {} \; | head -n 1)
-              echo "Found gradlew in: $GRADLE_DIR"
-              cd "$GRADLE_DIR"
+              # Create the gradlew wrapper on the fly so we don't need it in the zip
+              gradle wrapper
               chmod +x gradlew
               ./gradlew assembleDebug
 
@@ -30,4 +28,4 @@
             uses: actions/upload-artifact@v4
             with:
               name: capri-apk
-              path: '**/build/outputs/apk/debug/app-debug.apk'
+              path: app/build/outputs/apk/debug/app-debug.apk
