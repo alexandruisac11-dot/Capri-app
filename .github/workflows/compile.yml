@@ -1,0 +1,15 @@
+  name: Build Capri
+
+  on: [push, workflow_dispatch]
+
+  jobs:
+    build:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+
+        - name: Debug files
+          run: |
+            ls -la
+            unzip -o capri.zip
+            ls -la
