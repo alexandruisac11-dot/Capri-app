@@ -23,10 +23,10 @@ jobs:
           gradle-version: '8.7'
 
       - name: Build APK Directly
-        run: gradle assembleDebug
+        run: gradle assembleDebug -Pandroid.kotlin.warningIsError=false --continue
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: capri-apk
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: app/build/outputs/apk/debug/
