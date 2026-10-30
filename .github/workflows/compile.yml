@@ -17,12 +17,11 @@
               java-version: '17'
               distribution: 'temurin'
 
-          - name: Generate Gradle Wrapper and Build APK
-            run: |
-              # Create the gradlew wrapper on the fly so we don't need it in the zip
-              gradle wrapper
-              chmod +x gradlew
-              ./gradlew assembleDebug
+          - name: Set up Gradle
+            uses: gradle/actions/setup-gradle@v3
+
+          - name: Build APK Directly
+            run: gradle assembleDebug
 
           - name: Upload APK Artifact
             uses: actions/upload-artifact@v4
